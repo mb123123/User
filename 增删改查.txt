@@ -1,0 +1,61 @@
+<?php
+//连接mysql
+$con = mysqli_connect("127.0.0.1","root","root");
+#var_dump($con);
+#echo "1";
+if(!$con)
+	{	
+	die('无法连接: ' . mysql_error());
+	}
+//创建数据库
+$Adb=mysqli_query($con,"CREATE DATABASE ku");
+if($Adb===false){
+	echo "创建数据库失败:".mysqli_error($con);
+	exit;
+	}
+//创建表
+mysqli_select_db($con,"ku");
+
+$sql1="CREATE TABLE persons
+(
+id int(3),
+name varchar(3),
+age int(3)
+)";
+$mysql=mysqli_query($con,$sql1);
+if($mysql===false){
+	echo "创建表失败".mysqli_error($con);
+	exit;
+}
+//添加数据
+$addtext1="INSERT INTO persons VALUES(1,'a',12),(2,'b',20)";
+$addtext=mysqli_query($con,$addtext1);
+if($addtext===false){
+	echo "添加数据失败:".mysqli_error($con);
+	exit;
+}
+//修改数据
+$utext1="UPDATE persons SET age=18 WHERE id=1";
+$utext=mysqli_query($con,$utext1);
+if($utext===false){
+	echo "修改数据失败:".mysqli_error($con);
+	exit;
+}
+
+//查找数据
+$stext1="SELECT id,name FROM persons WHERE id=1";
+$stext=mysqli_query($con,$stext1);
+if($stext===false){
+	echo "查询失败:".mysqli_error($con);
+	exit;
+}
+$row = mysqli_affected_rows($con);
+echo "修改的数目结果是：".$row;
+//删除数据
+$rtext1="DELETE FROM parsons";
+$rtext=mysqli_query($con,$rtext1);
+if($rtext===false){
+	echo "删除失败".mysqli_error($con);
+	exit;
+}
+?>
