@@ -1,5 +1,5 @@
 <?php
-//连接mysql
+//连接mysql1
 $con = mysqli_connect("127.0.0.1","root","root");
 #var_dump($con);
 #echo "1";
